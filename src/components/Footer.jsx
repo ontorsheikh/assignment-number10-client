@@ -26,8 +26,8 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/games" className="hover:text-secondary">
-                Games
+              <Link to="/foods" className="hover:text-secondary">
+                Foods
               </Link>
             </li>
             <li>

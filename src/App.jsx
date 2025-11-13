@@ -6,9 +6,13 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <div className="max-w-7xl mx-auto">
+        <Header />
+        <div className="px-5">
+          <Outlet />
+        </div>
+        <Footer />
+      </div>
     </>
   );
 }
