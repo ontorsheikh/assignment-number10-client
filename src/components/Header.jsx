@@ -10,8 +10,8 @@ const Header = () => {
       <NavLink to="/" className="btn">
         Home
       </NavLink>
-      <NavLink to="/foods" className="btn">
-        Foods
+      <NavLink to="/allReviews" className="btn">
+        All Reviews
       </NavLink>
       <NavLink to="/about" className="btn">
         About
