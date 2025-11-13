@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivetRouter from "./PrivetRouter";
 import AddReview from "../pages/AddReview";
+import AllReviews from "../pages/AllReviews";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "/allReviews",
+        Component: AllReviews,
       },
       {
         path: "/login",
