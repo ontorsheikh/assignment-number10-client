@@ -24,10 +24,10 @@ const Header = () => {
   const rightMenu = (
     <>
       {user ? (
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end z-10">
           <div tabIndex={0} role="button" className="m-1 cursor-pointer">
             <img
-              src="https://assignment-no10-private.web.app/user.png"
+              src={user.photoURL}
               alt=""
               className="w-10 h-10 rounded-full cursor-pointer"
             />
@@ -37,10 +37,10 @@ const Header = () => {
             className="dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-2 shadow-sm"
           >
             <li>
-              <span>name</span>
+              <span>{user.displayName}</span>
             </li>
             <li>
-              <span>email sdggfgdfg</span>
+              <span>{user.email}</span>
             </li>
             <li>
               <span className="block">
@@ -69,7 +69,7 @@ const Header = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
-        <div className="dropdown">
+        <div className="dropdown z-20">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
