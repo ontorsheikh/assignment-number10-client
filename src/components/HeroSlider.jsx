@@ -33,7 +33,7 @@ const slides = [
 
 export default function HeroSlider() {
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full h-[50vh] lg:h-[80vh] overflow-hidden">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}

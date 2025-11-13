@@ -17,7 +17,6 @@ const ReviewCard = ({ review }) => {
         <img
           src={foodImage}
           alt={foodName}
-          fill
           className="object-cover group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute top-3 right-3 bg-secondary text-white px-2 py-1 rounded-full text-sm font-bold flex items-center gap-1">
