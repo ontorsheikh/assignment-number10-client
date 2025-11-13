@@ -1,21 +1,24 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
 
 const Header = () => {
-  const user = true;
+  const { user, userLoading, logOut } = useContext(AuthContext);
+  if (userLoading) return;
   const menuLinks = (
     <>
-        <NavLink to="/" className="btn">
-          Home
-        </NavLink>
-        <NavLink to="/foods" className="btn">
-          Foods
-        </NavLink>
-        <NavLink to="/about" className="btn">
-          About
-        </NavLink>
-        <NavLink to="/contact" className="btn">
-          Contact
-        </NavLink>
+      <NavLink to="/" className="btn">
+        Home
+      </NavLink>
+      <NavLink to="/foods" className="btn">
+        Foods
+      </NavLink>
+      <NavLink to="/about" className="btn">
+        About
+      </NavLink>
+      <NavLink to="/contact" className="btn">
+        Contact
+      </NavLink>
     </>
   );
   const rightMenu = (
@@ -41,7 +44,10 @@ const Header = () => {
             </li>
             <li>
               <span className="block">
-                <button className="btn btn-error text-white w-full">
+                <button
+                  onClick={logOut}
+                  className="btn btn-error text-white w-full"
+                >
                   Log Out
                 </button>
               </span>

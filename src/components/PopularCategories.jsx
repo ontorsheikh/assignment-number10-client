@@ -78,7 +78,7 @@ const PopularCategories = () => {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-70" />
 
                   <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                     <div className="flex items-center gap-2 mb-1">
