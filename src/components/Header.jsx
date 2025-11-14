@@ -48,6 +48,13 @@ const Header = () => {
             </li>
             <li>
               <span className="block">
+                <Link to="myFavorites" className="btn btn-outline btn-secondary w-full">
+                  My Favorites
+                </Link>
+              </span>
+            </li>
+            <li>
+              <span className="block">
                 <button
                   onClick={logOut}
                   className="btn btn-error text-white w-full"

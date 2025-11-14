@@ -8,6 +8,7 @@ import AddReview from "../pages/AddReview";
 import AllReviews from "../pages/AllReviews";
 import MyReviews from "../pages/MyReviews";
 import Error from "../pages/Error";
+import MyFavorites from "../pages/MyFavorites";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRouter>
             <MyReviews />
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "/myFavorites",
+        element: (
+          <PrivetRouter>
+            <MyFavorites />
           </PrivetRouter>
         ),
       },
