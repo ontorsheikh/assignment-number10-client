@@ -43,8 +43,8 @@ const ReviewCard = ({ review }) => {
           </span>
         </div>
 
-        <Link href={`/review/${id}`}>
-          <button className="mt-4 w-full bg-secondary/90 hover:bg-secondary text-white font-medium py-2.5 rounded-lg transition-colors">
+        <Link to={`/review/${id}`}>
+          <button className="mt-4 w-full bg-secondary/90 hover:bg-secondary text-white font-medium py-2.5 rounded-lg transition-colors cursor-pointer">
             View Details
           </button>
         </Link>
