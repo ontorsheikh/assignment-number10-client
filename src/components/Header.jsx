@@ -3,8 +3,7 @@ import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 
 const Header = () => {
-  const { user, userLoading, logOut } = useContext(AuthContext);
-  if (userLoading) return;
+  const { user, logOut } = useContext(AuthContext);
   const menuLinks = (
     <>
       <NavLink to="/" className="btn">

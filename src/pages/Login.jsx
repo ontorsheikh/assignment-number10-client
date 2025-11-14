@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Loading from "../components/Loading";
 
 const Login = () => {
   const { user, userLoading, setUserLoading, logInUEP, createUG } =
@@ -19,7 +20,7 @@ const Login = () => {
     }
   }, [user, userLoading, navigate, from]);
 
-  if (userLoading) return;
+  if (userLoading) return <Loading />;
 
   const handleSubmit = (e) => {
     e.preventDefault();

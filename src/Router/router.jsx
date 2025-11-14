@@ -7,6 +7,7 @@ import PrivetRouter from "./PrivetRouter";
 import AddReview from "../pages/AddReview";
 import AllReviews from "../pages/AllReviews";
 import MyReviews from "../pages/MyReviews";
+import Error from "../pages/Error";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
             <MyReviews />
           </PrivetRouter>
         ),
+      },
+      {
+        path: "/*",
+        Component: Error,
       },
     ],
   },
