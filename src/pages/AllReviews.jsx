@@ -64,7 +64,7 @@ const mockReviews = [
 ];
 const AllReviews = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -74,6 +74,30 @@ const AllReviews = () => {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Explore authentic experiences from foodies around the world.
           </p>
+        </div>
+
+        {/* Search */}
+        <div className="flex items-center justify-center my-10 gap-2">
+          <label className="input border-gray-500">
+            <svg
+              className="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input type="search" required placeholder="Search" />
+          </label>
+          <button className="btn btn-secondary">Search</button>
         </div>
 
         {/* Reviews Grid */}
