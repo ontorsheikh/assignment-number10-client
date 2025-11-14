@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import PrivetRouter from "./PrivetRouter";
 import AddReview from "../pages/AddReview";
 import AllReviews from "../pages/AllReviews";
+import MyReviews from "../pages/MyReviews";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRouter>
             <AddReview />
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "/myReviews",
+        element: (
+          <PrivetRouter>
+            <MyReviews />
           </PrivetRouter>
         ),
       },

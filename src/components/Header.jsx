@@ -16,9 +16,6 @@ const Header = () => {
       <NavLink to="/about" className="btn">
         About
       </NavLink>
-      <NavLink to="/contact" className="btn">
-        Contact
-      </NavLink>
     </>
   );
   const rightMenu = (
@@ -34,13 +31,21 @@ const Header = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-2 shadow-sm"
+            className="dropdown-content menu bg-base-100 rounded-box z-1 w-60 p-2 shadow-sm"
           >
             <li>
-              <span>{user.displayName}</span>
+              <span className="block">
+                <Link to="addReview" className="btn btn-outline btn-secondary w-full">
+                  Add Review
+                </Link>
+              </span>
             </li>
             <li>
-              <span>{user.email}</span>
+              <span className="block">
+                <Link to="myReviews" className="btn btn-outline btn-secondary w-full">
+                  My Reviews
+                </Link>
+              </span>
             </li>
             <li>
               <span className="block">
