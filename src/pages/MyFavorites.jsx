@@ -31,7 +31,7 @@ const MyFavorites = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true);
-        instanceSecure.delete(`/deleteFavorites/${id}`).then((result) => {
+        instanceSecure.delete(`/deleteFavorite/${id}`).then((result) => {
           if (result.data.deletedCount > 0) {
             const updated = reviews.filter((review) => review._id !== id);
             setReviews(updated);
@@ -170,11 +170,14 @@ const MyFavorites = () => {
                   Ratings:{" "}
                   <span className="text-secondary text-sm flex items-center ">
                     <FaStar />
-                    {review.rating}
+                    {review.ratings}
                   </span>
                 </span>
 
-                <button className="btn btn-error w-full">
+                <button
+                  onClick={() => handleDelete(review._id)}
+                  className="btn btn-error w-full"
+                >
                   <Trash2 className="text-white" />
                 </button>
               </div>
