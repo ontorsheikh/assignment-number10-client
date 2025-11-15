@@ -78,7 +78,7 @@ const AllReviews = () => {
 
         {/* Search */}
         <div className="flex items-center justify-center my-10 gap-2">
-          <label className="input border-gray-500">
+          <label className="input border-secondary outline-secondary">
             <svg
               className="h-[1em] opacity-50"
               xmlns="http://www.w3.org/2000/svg"

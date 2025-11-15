@@ -1,7 +1,50 @@
-import { useState } from "react";
+import { use, useState } from "react";
+import Loading from "../components/Loading";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddReview = () => {
   const [rate, setRate] = useState("Excellent");
+  const [loading, setLoading] = useState(false);
+  const { user } = use(AuthContext);
+  const instanceSecure = useAxiosSecure();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    let ratings = 0;
+    if (rate === "Excellent") {
+      ratings = 5;
+    } else if (rate === "Good") {
+      ratings = 4;
+    } else if (rate === "Okay") {
+      ratings = 3;
+    } else if (rate === "Bad") {
+      ratings = 2;
+    } else {
+      ratings = 1;
+    }
+
+    const newReview = {
+      foodName: e.target.foodName.value,
+      foodImage: e.target.foodImage.value,
+      restaurantName: e.target.restaurantName.value,
+      location: e.target.location.value,
+      reviewText: e.target.reviewText.value,
+      ratings: ratings,
+      providerEmail: user.email,
+      providerName: user.displayName,
+    };
+
+    instanceSecure.post("/newReview", newReview).then((result) => {
+      console.log(result.data);
+      setLoading(false)
+    });
+  };
+
+  if (loading) return <Loading />;
+
   return (
     <div className="bg-linear-to-br from-orange-50 to-amber-50 py-12 px-4">
       <div className="max-w-3xl mx-auto">
@@ -16,7 +59,7 @@ const AddReview = () => {
         {/* Form Card */}
         <div className="card bg-white shadow-xl">
           <div className="card-body p-8">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Food Name */}
               <div className="flex flex-col gap-2">
                 <label className="label">Food Name</label>
