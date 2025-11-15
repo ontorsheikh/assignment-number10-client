@@ -3,13 +3,13 @@ import { Link } from "react-router";
 
 const ReviewCard = ({ review }) => {
   const {
-    id,
+    _id,
     foodImage,
     foodName,
     restaurantName,
     location,
-    reviewerName,
-    rating,
+    providerName,
+    ratings,
   } = review;
   return (
     <div className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
@@ -31,7 +31,7 @@ const ReviewCard = ({ review }) => {
           </h3>
           <span className="text-secondary flex items-center gap-1">
             <FaStar />
-            {rating}
+            {ratings}
           </span>
         </div>
         <p className="text-sm text-secondary font-medium">{restaurantName}</p>
@@ -39,11 +39,11 @@ const ReviewCard = ({ review }) => {
 
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-600">
-            by <span className="font-medium">{reviewerName}</span>
+            by <span className="font-medium">{providerName}</span>
           </span>
         </div>
 
-        <Link to={`/review/${id}`}>
+        <Link to={`/review/${_id}`}>
           <button className="mt-4 w-full bg-secondary/90 hover:bg-secondary text-white font-medium py-2.5 rounded-lg transition-colors cursor-pointer">
             View Details
           </button>
