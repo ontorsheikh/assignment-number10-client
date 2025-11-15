@@ -7,13 +7,19 @@ const AllReviews = () => {
   const instance = useAxios();
   const [reviews, setReviews] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    instance.get("/allReviews").then((result) => {
-      setReviews(result.data);
-      setLoading(false);
-    });
-  }, [instance]);
+    const delay = setTimeout(() => {
+      instance.get(`/search?search=${search}`).then((result) => {
+        setLoading(false);
+        setReviews(result.data);
+      });
+    }, 500);
+
+    return () => clearTimeout(delay);
+  }, [instance, search]);
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto">
@@ -28,7 +34,7 @@ const AllReviews = () => {
         </div>
 
         {/* Search */}
-        <div className="flex items-center justify-center my-10 gap-2">
+        <div className="flex items-center justify-center my-10 w-full">
           <label className="input border-secondary outline-secondary">
             <svg
               className="h-[1em] opacity-50"
@@ -46,9 +52,17 @@ const AllReviews = () => {
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input type="search" required placeholder="Search" />
+            <input
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setLoading(true);
+              }}
+              type="search"
+              name="search"
+              required
+              placeholder="Search"
+            />
           </label>
-          <button className="btn btn-secondary">Search</button>
         </div>
 
         {/* Reviews Grid */}
