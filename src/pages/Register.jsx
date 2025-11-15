@@ -8,8 +8,6 @@ import Loading from "../components/Loading";
 const Register = () => {
   const { user, userLoading, setUserLoading, createUEP, createUG, updateUser } =
     useContext(AuthContext);
-  const [passValidateText, setPassValidateText] = useState("");
-  const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,33 +22,25 @@ const Register = () => {
 
   if (userLoading) return <Loading />;
 
-  const passwordValidate = (e) => {
-    const tempPass = e.target.value;
-
-    if (!/[a-z]/.test(tempPass)) {
-      setPassValidateText("Password must contain lowercase.");
-      return;
-    } else if (!/[A-Z]/.test(tempPass)) {
-      setPassValidateText("Password must contain Uppercase.");
-      return;
-    } else if (tempPass.length < 6) {
-      setPassValidateText("Password must 6 letters.");
-      return;
-    } else {
-      setPassValidateText("");
-      setPassword(tempPass);
-      return;
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const photoUrl = e.target.photoUrl.value;
+    const password = e.target.password.value;
+    const confirm = e.target.confirmPassword.value;
 
-    if (!password) {
-      toast.error("Please enter validate password!");
+    if (!/[a-z]/.test(password)) {
+      toast.error("Password must contain lowercase!");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      toast.error("Password must contain Uppercase!");
+      return;
+    } else if (password.length < 6) {
+      toast.error("Password must 6 letters!");
+      return;
+    } else if (password !== confirm) {
+      toast.error("Password does not matched!");
       return;
     }
 
@@ -142,7 +132,6 @@ const Register = () => {
           <input
             id="password"
             name="password"
-            onChange={passwordValidate}
             type={passwordType ? "password" : "text"}
             required
             placeholder="Enter your password"
@@ -162,9 +151,32 @@ const Register = () => {
             )}
           </span>
         </div>
-        <span className="text-[12px] font-medium text-right text-secondary">
-          {passValidateText}
-        </span>
+        {/* Confirm password */}
+        <div className="flex flex-col gap-2 relative">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type={passwordType ? "password" : "text"}
+            required
+            placeholder="Enter your confirm password"
+            className="input w-full ps-2 pe-8"
+          />
+          <span className="absolute top-3/5 right-2 bg-white z-10">
+            {passwordType ? (
+              <FaEye
+                onClick={() => setPasswordType(!passwordType)}
+                className="text-gray-600 cursor-pointer"
+              />
+            ) : (
+              <FaEyeSlash
+                onClick={() => setPasswordType(!passwordType)}
+                className="text-gray-600 cursor-pointer"
+              />
+            )}
+          </span>
+        </div>
+
         <div className="flex justify-end">
           <button className="btn btn-secondary px-10 cursor-pointer">
             Register
