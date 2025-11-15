@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Star, MapPin, Store, Heart } from "lucide-react";
 import useAxios from "../hooks/useAxios";
 import { useParams } from "react-router";
 import Loading from "../components/Loading";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const ReviewDetails = () => {
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
   const instance = useAxios();
+  const instanceSecure = useAxiosSecure();
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,7 +24,68 @@ const ReviewDetails = () => {
     });
   }, [instance, id]);
 
+  useEffect(() => {
+    instanceSecure
+      .get(`/myFavorite?loggedEmail=${user.email}&reviewId=${id}`)
+      .then((result) => {
+        if (result.data) {
+          setIsLiked(true);
+          return;
+        }
+      });
+  }, [instanceSecure, user, id]);
+
+  const handleLiked = () => {
+    if (isLiked) {
+      Swal.fire({
+        title:
+          "You are already added to favorites. Do you delete it from favorites?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setLoading(true);
+          instanceSecure
+            .delete(
+              `/deleteFavoriteDetails?reviewId=${id}&loggedEmail=${user.email}`
+            )
+            .then((result) => {
+              setLoading(false);
+              if (result.data.deletedCount > 0) {
+                setIsLiked(false);
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your review has been deleted from favorites.",
+                  icon: "success",
+                });
+              }
+            });
+        }
+      });
+      return;
+    }
+    const newFavorite = {
+      foodImage: review.foodImage,
+      foodName: review.foodName,
+      restaurantName: review.restaurantName,
+      ratings: review.ratings,
+      reviewId: id,
+      loggedEmail: user.email,
+    };
+    instanceSecure.post("/newFavorite", newFavorite).then((finalResult) => {
+      if (finalResult.data.insertedId) {
+        setIsLiked(true);
+        toast.success("Review added to favorites successfully.");
+      }
+    });
+  };
+
   if (loading) return <Loading />;
+  
   return (
     <div className="min-h-[50vh] bg-gray-50">
       <div className="max-w-4xl mx-auto py-8">
@@ -51,7 +118,7 @@ const ReviewDetails = () => {
                 </p>
               </div>
               <button
-                onClick={() => setIsLiked(!isLiked)}
+                onClick={handleLiked}
                 className="transition-transform hover:scale-110 cursor-pointer"
               >
                 <Heart
