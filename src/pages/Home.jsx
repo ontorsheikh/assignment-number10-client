@@ -6,7 +6,7 @@ import CommunitySpotlight from "../components/CommunitySpotlight";
 
 const Home = () => {
   return (
-    <div>
+    <div className="mt-10">
       <HeroSlider />
       <FeaturedReviews />
       <PopularCategories />

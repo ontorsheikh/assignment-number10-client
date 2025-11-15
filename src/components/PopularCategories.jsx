@@ -69,7 +69,7 @@ const PopularCategories = () => {
           {categories.map((cat) => {
             const Icon = cat.icon;
             return (
-              <Link key={cat.name} href={cat.href}>
+              <div key={cat.name}>
                 <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-48 md:h-56 cursor-pointer">
                   <div className="absolute inset-0">
                     <img
@@ -88,7 +88,7 @@ const PopularCategories = () => {
                     <p className="text-sm opacity-90">View all →</p>
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
