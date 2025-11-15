@@ -1,5 +1,9 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { use, useEffect, useState } from "react";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
+import Loading from "../components/Loading";
 
 const mockUserReviews = [
   {
@@ -29,6 +33,17 @@ const mockUserReviews = [
 ];
 
 const MyReviews = () => {
+  const { user } = use(AuthContext);
+  const instance = useAxiosSecure();
+  const [reviews, setReviews] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    instance.get(`/myReviews?email=${user.email}`).then((result) => {
+      setReviews(result.data);
+      setLoading(false);
+    });
+  }, [instance, user]);
   return (
     <div className="bg-linear-to-br from-orange-50 to-amber-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -42,7 +57,7 @@ const MyReviews = () => {
 
         {/* Table */}
         <div className="overflow-x-auto bg-white rounded-xl shadow-lg hidden sm:flex">
-          <table className="table table-zebra w-full">
+          <table className="table block table-zebra w-full">
             <thead>
               <tr className="bg-orange-100">
                 <th>SL NO</th>
@@ -54,59 +69,72 @@ const MyReviews = () => {
               </tr>
             </thead>
             <tbody>
-              {mockUserReviews.map((review, index) => (
-                <tr key={review.id} className="hover:bg-gray-50">
-                  {/* Food Name */}
-                  <td className="font-medium text-gray-800">{index + 1}</td>
-                  {/* Food Image */}
-                  <td>
-                    <div className="avatar">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden">
-                        <img
-                          src={review.foodImage}
-                          alt={review.foodName}
-                          className="object-cover w-full h-full"
-                        />
+              {loading ? (
+                <td colSpan={6}>
+                  <Loading />
+                </td>
+              ) : reviews.length === 0 ? (
+                <td colSpan={6}>
+                  <h2 className="text-center text-2xl font-bold my-10">
+                    Reviews not found!
+                  </h2>
+                </td>
+              ) : (
+                reviews.map((review, index) => (
+                  <tr key={review._id} className="hover:bg-gray-50">
+                    {/* Food SL NO */}
+                    <td className="font-medium text-gray-800">{index + 1}</td>
+
+                    {/* Food Image */}
+                    <td>
+                      <div className="avatar">
+                        <div className="w-12 h-12 rounded-lg overflow-hidden">
+                          <img
+                            src={review.foodImage}
+                            alt={review.foodName}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  {/* Food Name */}
-                  <td className="font-medium text-gray-800">
-                    {review.foodName}
-                  </td>
+                    {/* Food Name */}
+                    <td className="font-medium text-gray-800">
+                      {review.foodName}
+                    </td>
 
-                  {/* Restaurant */}
-                  <td>
-                    <div className="flex items-center gap-1 text-sm text-gray-600">
-                      {review.restaurantName}
-                    </div>
-                  </td>
+                    {/* Restaurant */}
+                    <td>
+                      <div className="flex items-center gap-1 text-sm text-gray-600">
+                        {review.restaurantName}
+                      </div>
+                    </td>
 
-                  {/* Posted Date */}
-                  <td className="text-center text-sm text-gray-600">
-                    {review.postedAt}
-                  </td>
+                    {/* Posted Date */}
+                    <td className="text-center text-sm text-gray-600">
+                      {new Date(review.postedAt).toLocaleDateString()}
+                    </td>
 
-                  {/* Actions */}
-                  <td className="text-center">
-                    <div className="flex justify-center gap-2">
-                      {/* Edit Button */}
-                      <Link
-                        to={`/editReview/${review.id}`}
-                        className="btn btn-xs btn-ghost text-secondary"
-                      >
-                        <Pencil />
-                      </Link>
+                    {/* Actions */}
+                    <td className="text-center">
+                      <div className="flex justify-center gap-2">
+                        {/* Edit Button */}
+                        <Link
+                          to={`/editReview/${review.id}`}
+                          className="btn btn-xs btn-ghost text-secondary"
+                        >
+                          <Pencil />
+                        </Link>
 
-                      {/* Delete Button */}
-                      <button className="btn btn-sm btn-ghost text-red-600 hover:bg-red-50">
-                        <Trash2 />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                        {/* Delete Button */}
+                        <button className="btn btn-sm btn-ghost text-red-600 hover:bg-red-50">
+                          <Trash2 />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

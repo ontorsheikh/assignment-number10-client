@@ -70,7 +70,7 @@ export default function HeroSlider() {
                 <p className="text-lg md:text-xl lg:text-2xl text-white drop-shadow-md mb-8 max-w-2xl animate-fade-in-delay">
                   {slide.subtitle}
                 </p>
-                <button className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-lg rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <button className="px-8 py-4 bg-secondary text-white font-semibold text-lg rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                   {slide.buttonText}
                 </button>
               </div>

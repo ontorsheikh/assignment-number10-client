@@ -36,6 +36,7 @@ const AddReview = () => {
       location: e.target.location.value,
       reviewText: e.target.reviewText.value,
       ratings: ratings,
+      postedAt: new Date(),
       providerEmail: user.email,
       providerName: user.displayName,
     };
