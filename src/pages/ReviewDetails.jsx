@@ -1,37 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Star, MapPin, Store, Heart } from "lucide-react";
-
-const review = {
-  id: 1,
-  foodImage:
-    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
-  foodName: "Margherita Pizza",
-  restaurantName: "Bella Italia",
-  location: "Downtown, New York",
-  reviewerName: "Sarah Chen",
-  rating: 4.9,
-  authorName: "somrat",
-  reviewText:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dignissimos laboriosam, totam libero sit obcaecati repellendus possimus accusamus laudantium saepe?",
-};
+import useAxios from "../hooks/useAxios";
+import { useParams } from "react-router";
+import Loading from "../components/Loading";
 
 const ReviewDetails = () => {
+  const [loading, setLoading] = useState(true);
+  const [review, setReview] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
+  const instance = useAxios();
+  const { id } = useParams();
+
+  useEffect(() => {
+    instance.get(`/review/${id}`).then((result) => {
+      setReview(result.data);
+      setLoading(false);
+    });
+  }, [instance, id]);
+
+  if (loading) return <Loading />;
   return (
     <div className="min-h-[50vh] bg-gray-50">
       <div className="max-w-4xl mx-auto py-8">
-        <article className="bg-white rounded-2xl overflow-hidden">
+        <article className="bg-white">
           {/* Hero Image + Rating Badge */}
           <div className="relative">
             <img
-              src={review.foodImage || "/placeholder-food.jpg"}
+              src={review.foodImage}
               alt={review.foodName}
               className="w-full sm:h-96 object-cover"
             />
             <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg">
               <div className="flex items-center gap-1 text-secondary">
                 <Star className="w-6 h-6 fill-secondary" />
-                <span className="text-2xl font-bold">{review.rating}</span>
+                <span className="text-2xl font-bold">{review.ratings}</span>
                 <span>/5</span>
               </div>
             </div>
@@ -45,7 +47,7 @@ const ReviewDetails = () => {
                   {review.foodName}
                 </h1>
                 <p className="text-xl text-gray-700 mt-1">
-                  by {review.authorName}
+                  by {review.providerName}
                 </p>
               </div>
               <button
@@ -76,7 +78,7 @@ const ReviewDetails = () => {
             {/* Star Rating Row */}
             <div className="mb-10 flex items-center gap-3">
               <span className="text-4xl font-bold text-gray-800">
-                {review.rating}
+                {review.ratings}
               </span>
               <Star className="w-8 h-8 text-secondary fill-secondary" />
             </div>
