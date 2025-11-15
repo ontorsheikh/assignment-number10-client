@@ -2,10 +2,13 @@ import { use, useState } from "react";
 import Loading from "../components/Loading";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddReview = () => {
   const [rate, setRate] = useState("Excellent");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const { user } = use(AuthContext);
   const instanceSecure = useAxiosSecure();
 
@@ -38,8 +41,11 @@ const AddReview = () => {
     };
 
     instanceSecure.post("/newReview", newReview).then((result) => {
-      console.log(result.data);
-      setLoading(false)
+      setLoading(false);
+      if (result.data.insertedId) {
+        toast.success("Review added successfully.");
+        navigate("/myReviews");
+      }
     });
   };
 
