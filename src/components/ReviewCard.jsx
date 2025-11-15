@@ -1,5 +1,9 @@
 import { FaHeart, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
+import { use } from "react";
+import { toast } from "react-toastify";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
 
 const ReviewCard = ({ review }) => {
   const {
@@ -11,6 +15,32 @@ const ReviewCard = ({ review }) => {
     providerName,
     ratings,
   } = review;
+  const { user } = use(AuthContext);
+  const instanceSecure = useAxiosSecure();
+
+  const handleLiked = () => {
+    instanceSecure
+      .get(`/myFavorite?loggedEmail=${user.email}&reviewId=${_id}`)
+      .then((result) => {
+        if (result.data) {
+          toast.error("Review already save to favorites.");
+          return;
+        }
+        const newFavorite = {
+          foodImage,
+          foodName,
+          restaurantName,
+          ratings,
+          reviewId: _id,
+          loggedEmail: user.email,
+        };
+        instanceSecure.post("/newFavorite", newFavorite).then((finalResult) => {
+          if (finalResult.data.insertedId) {
+            toast.success("Review added to favorites successfully.");
+          }
+        });
+      });
+  };
   return (
     <div className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
       <div className="relative h-48 overflow-hidden">
@@ -19,7 +49,10 @@ const ReviewCard = ({ review }) => {
           alt={foodName}
           className="object-cover group-hover:scale-110 transition-transform duration-500 w-full"
         />
-        <button className="absolute top-3 right-3 bg-white text-secondary p-2 rounded-full text-sm font-bold flex items-center gap-1 cursor-pointer hover:scale-125 duration-200">
+        <button
+          onClick={handleLiked}
+          className="absolute top-3 right-3 bg-white text-secondary p-2 rounded-full text-sm font-bold flex items-center gap-1 cursor-pointer hover:scale-125 duration-200"
+        >
           <FaHeart className="w-6 h-6 fill-current" />
         </button>
       </div>
