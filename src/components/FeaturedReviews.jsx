@@ -8,7 +8,6 @@ const FeaturedReviews = () => {
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState(null);
   const instance = useAxios();
-  console.log(reviews);
 
   useEffect(() => {
     instance.get("/topReviews").then((result) => {

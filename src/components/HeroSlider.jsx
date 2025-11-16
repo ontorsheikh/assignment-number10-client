@@ -19,7 +19,7 @@ const slides = [
     subtitle: "Farm-to-table meals made with love",
     buttonText: "View Menu",
     image:
-      "https://img.freepik.com/premium-photo/empty-plate-indian-man-with-beard-holding-spoon-fork-wearing-checkered-shirt-sitting-table_466689-45827.jpg?w=2000",
+      "https://img.freepik.com/free-photo/top-view-fresh-vegetable-concept_23-2148501521.jpg?t=st=1763254389~exp=1763257989~hmac=e3c82c3655c1e85cf6f1e37e4687304fc971591bed24404afe4899daf6aa91e3&w=740",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const slides = [
     subtitle: "Handcrafted dishes passed down generations",
     buttonText: "Order Now",
     image:
-      "https://img.freepik.com/premium-photo/empty-plate-indian-man-with-beard-holding-spoon-fork-wearing-checkered-shirt-sitting-table_466689-45827.jpg?w=2000",
+      "https://img.freepik.com/premium-photo/high-angle-view-potted-plant-table_1048944-796566.jpg?w=1480",
   },
 ];
 

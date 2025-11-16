@@ -11,6 +11,7 @@ import Error from "../pages/Error";
 import MyFavorites from "../pages/MyFavorites";
 import ReviewDetails from "../pages/ReviewDetails";
 import EditReview from "../pages/EditReview";
+import About from "../pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
             <MyFavorites />
           </PrivetRouter>
         ),
+      },
+      {
+        path: "/about",
+        Component: About,
       },
       {
         path: "/*",

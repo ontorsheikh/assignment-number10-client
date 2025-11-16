@@ -89,7 +89,7 @@ const MyFavorites = () => {
                 </tr>
               ) : (
                 reviews.map((review, index) => (
-                  <tr key={review.id} className="hover:bg-gray-50">
+                  <tr key={review._id} className="hover:bg-gray-50">
                     {/* Food Name */}
                     <td className="font-medium text-gray-800">{index + 1}</td>
                     {/* Food Image */}
@@ -151,7 +151,7 @@ const MyFavorites = () => {
             </h2>
           ) : (
             reviews.map((review) => (
-              <div key={review.id} className="flex flex-col gap-1">
+              <div key={review._id} className="flex flex-col gap-1">
                 <div className="flex gap-2">
                   <img
                     src={review.foodImage}
