@@ -85,9 +85,10 @@ const ReviewDetails = () => {
   };
 
   if (loading) return <Loading />;
-  
+
   return (
     <div className="min-h-[50vh] bg-gray-50">
+      <title>{`${review.foodName} | Foods Lovers`}</title>
       <div className="max-w-4xl mx-auto py-8">
         <article className="bg-white">
           {/* Hero Image + Rating Badge */}

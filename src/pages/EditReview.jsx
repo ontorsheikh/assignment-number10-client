@@ -73,6 +73,7 @@ const EditReview = () => {
 
   return (
     <div className="bg-linear-to-br from-orange-50 to-amber-50 py-12 px-4">
+      <title>Edit Food Review | Foods Lovers</title>
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">

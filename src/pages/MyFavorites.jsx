@@ -50,6 +50,7 @@ const MyFavorites = () => {
   };
   return (
     <div className="bg-linear-to-br from-orange-50 to-amber-50 py-12 px-4">
+      <title>Favorites Foods Here | Foods Lovers</title>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">

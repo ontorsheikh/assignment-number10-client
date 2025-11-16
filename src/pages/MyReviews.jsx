@@ -60,6 +60,7 @@ const MyReviews = () => {
   };
   return (
     <div className="bg-linear-to-br from-orange-50 to-amber-50 py-12 px-4">
+      <title>Your added reviews here | Foods Lovers</title>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">

@@ -7,6 +7,7 @@ import CommunitySpotlight from "../components/CommunitySpotlight";
 const Home = () => {
   return (
     <div className="mt-10">
+      <title>Foods Lovers | Real foodies share their favorite dishes</title>
       <HeroSlider />
       <FeaturedReviews />
       <PopularCategories />

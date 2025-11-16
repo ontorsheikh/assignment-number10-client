@@ -1,6 +1,7 @@
 const About = () => {
   return (
     <div className="my-10">
+      <title>About | Foods Lovers</title>
       <h1 className="text-3xl font-bold text-center mb-6">
         🥘 About Food Lovers
       </h1>
