@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Loading from "../components/Loading";
 import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
 
 const EditReview = () => {
   const [rate, setRate] = useState("Excellent");
@@ -12,6 +13,7 @@ const EditReview = () => {
   const navigate = useNavigate();
   const instance = useAxios();
   const instanceSecure = useAxiosSecure();
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
 
   const rateChange = (rating) => {
@@ -56,13 +58,15 @@ const EditReview = () => {
       ratings: ratings,
     };
 
-    instanceSecure.patch(`/editReview/${id}`, editedReview).then((result) => {
-      setLoading(false);
-      if (result.data.modifiedCount > 0) {
-        toast.success("Review updated successfully.");
-        navigate("/myReviews");
-      }
-    });
+    instanceSecure
+      .patch(`/editReview/${id}?email=${user.email}`, editedReview)
+      .then((result) => {
+        setLoading(false);
+        if (result.data.modifiedCount > 0) {
+          toast.success("Review updated successfully.");
+          navigate("/myReviews");
+        }
+      });
   };
 
   if (loading) return <Loading />;

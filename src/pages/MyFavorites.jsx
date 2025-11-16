@@ -31,18 +31,20 @@ const MyFavorites = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true);
-        instanceSecure.delete(`/deleteFavorite/${id}`).then((result) => {
-          if (result.data.deletedCount > 0) {
-            const updated = reviews.filter((review) => review._id !== id);
-            setReviews(updated);
+        instanceSecure
+          .delete(`/deleteFavorite/${id}?email=${user.email}`)
+          .then((result) => {
             setLoading(false);
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your review has been deleted.",
-              icon: "success",
-            });
-          }
-        });
+            if (result.data.deletedCount > 0) {
+              const updated = reviews.filter((review) => review._id !== id);
+              setReviews(updated);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your review has been deleted.",
+                icon: "success",
+              });
+            }
+          });
       }
     });
   };

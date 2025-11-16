@@ -5,6 +5,7 @@ import { use, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const MyReviews = () => {
   const { user } = use(AuthContext);
@@ -13,10 +14,19 @@ const MyReviews = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    instanceSecure.get(`/myReviews?email=${user.email}`).then((result) => {
-      setReviews(result.data);
-      setLoading(false);
-    });
+    instanceSecure
+      .get(`/myReviews?email=${user.email}`)
+      .then((result) => {
+        setLoading(false);
+        setReviews(result.data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        if (error.status === 403 || error.status === 401) {
+          toast.error("You are a hacker. Get out from my website.");
+          return;
+        }
+      });
   }, [instanceSecure, user]);
 
   const handleDelete = (id) => {
@@ -31,18 +41,20 @@ const MyReviews = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true);
-        instanceSecure.delete(`/deleteReview/${id}`).then((result) => {
-          if (result.data.deletedCount > 0) {
-            const updated = reviews.filter((review) => review._id !== id);
-            setReviews(updated);
+        instanceSecure
+          .delete(`/deleteReview/${id}?email=${user.email}`)
+          .then((result) => {
             setLoading(false);
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your review has been deleted.",
-              icon: "success",
-            });
-          }
-        });
+            if (result.data.deletedCount > 0) {
+              const updated = reviews.filter((review) => review._id !== id);
+              setReviews(updated);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your review has been deleted.",
+                icon: "success",
+              });
+            }
+          });
       }
     });
   };
@@ -77,7 +89,7 @@ const MyReviews = () => {
                     <Loading />
                   </td>
                 </tr>
-              ) : reviews.length === 0 ? (
+              ) : !reviews ? (
                 <tr>
                   <td colSpan={6}>
                     <h2 className="text-center text-2xl font-bold my-10">
@@ -149,15 +161,15 @@ const MyReviews = () => {
         </div>
 
         {/* Small device */}
-        {loading ? (
-          <Loading />
-        ) : reviews.length === 0 ? (
-          <h2 className="text-center text-2xl font-bold my-10">
-            Reviews not found!
-          </h2>
-        ) : (
-          <div className="grid gap-8 sm:hidden">
-            {reviews.map((review) => (
+        <div className="grid gap-8 sm:hidden">
+          {loading ? (
+            <Loading />
+          ) : !reviews ? (
+            <h2 className="text-center text-2xl font-bold my-10">
+              Reviews not found!
+            </h2>
+          ) : (
+            reviews.map((review) => (
               <div key={review._id} className="flex flex-col gap-1">
                 <div className="flex gap-2">
                   <img
@@ -194,9 +206,9 @@ const MyReviews = () => {
                   </button>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
