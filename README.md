@@ -1,16 +1,33 @@
-# React + Vite
+# 🍽️ Foods Lovers
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-19-blue)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-38BDF8)
+![Firebase](https://img.shields.io/badge/Firebase-Auth-orange)
+![Axios](https://img.shields.io/badge/Axios-API%20Client-green)
+![Swiper](https://img.shields.io/badge/Swiper-Carousel-purple)
 
-Currently, two official plugins are available:
+Live Site URL: **[https://assignment-number10.web.app](https://assignment-number10.web.app)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ⭐ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **🍕 Delicious Food Collections** – Browse a variety of foods with images, details, and categories.
+- **🔐 Secure User Authentication** – Firebase ensures safe login & registration.
+- **🎨 Interactive UI & Smooth Animations** – TailwindCSS + Swiper for a modern feel.
+- **🧭 Dynamic Routing** – React Router 7 provides seamless navigation.
+- **🔔 Real-time Alerts** – React Toastify & SweetAlert2 for notifications.
+- **⚡ Fast API Integration** – Axios handles quick and efficient API requests.
+- **📱 Fully Responsive Design** – Optimized for mobile, tablet, and desktop.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack (Frontend)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 19**
+- **TailwindCSS 4**
+- **Firebase Auth**
+- **Axios for API Calls**
+- **React Router 7**
+- **React Icons & Lucide-React**
+- **React Toastify**
+- **SweetAlert2**
+- **Swiper Carousel**
