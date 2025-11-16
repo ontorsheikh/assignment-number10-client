@@ -66,7 +66,7 @@ const Header = () => {
           </ul>
         </div>
       ) : (
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-1 sm:gap-2 items-center">
           <Link to="/login" className="btn btn-outline btn-secondary">
             Login
           </Link>
@@ -81,7 +81,7 @@ const Header = () => {
     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-30">
       <div className="navbar-start">
         <div className="dropdown z-20">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="mr-2 sm:btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -105,7 +105,7 @@ const Header = () => {
             {menuLinks}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Food Lovers</a>
+        <Link to="/" className="sm:btn btn-ghost text-xl font-bold">Food Lovers</Link>
         <ul className="menu menu-horizontal px-1 hidden lg:flex gap-2">
           {menuLinks}
         </ul>
