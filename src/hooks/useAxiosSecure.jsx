@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 
 const instanceSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://assignment-number10-server.vercel.app",
 });
 
 const useAxiosSecure = () => {
